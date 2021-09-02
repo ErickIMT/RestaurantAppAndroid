@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.pedidos.PedidosFragment"
+    android:layout_margin="8dp">
+
+        <TableRow>
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_header_mesa"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_header_listo"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_header_accion"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:gravity="center"/>
+        </TableRow>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rViewListaPedidos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</TableLayout>

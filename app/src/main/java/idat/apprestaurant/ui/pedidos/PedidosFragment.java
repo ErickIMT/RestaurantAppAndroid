@@ -35,7 +35,6 @@ import retrofit2.Response;
 public class PedidosFragment extends Fragment {
 
     private View v;
-    private PedidosViewModel pedidosViewModel;
     private RecyclerView recyclerView;
     private AdapterListaPedidos adapter;
     private PedidoService servP;

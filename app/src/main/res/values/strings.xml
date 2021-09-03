@@ -22,10 +22,16 @@
     <string name="menu_Pedidos">Pedidos</string>
     <string name="menu_LogOut">Log Out</string>
 
+    <string name="btn_formReserva">Registrar Reserva</string>
+
     <string name="tab_header_id">ID</string>
     <string name="tab_header_mesa">Mesa</string>
     <string name="tab_header_plato">Plato</string>
     <string name="tab_header_cantidad">Cantidad</string>
     <string name="tab_header_listo">Estado</string>
     <string name="tab_header_accion">Accion</string>
+    <string name="tab_header_fecha">Fecha</string>
+    <string name="tab_header_hora">Hora</string>
+    <string name="tab_header_cliente">Cliente</string>
+
 </resources>

@@ -2,24 +2,24 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:stretchColumns="1,2,3,4">
+    android:layout_margin="8dp">
 
     <TableRow>
         <TextView
             android:id="@+id/tab_list_mesa"
-            android:layout_width="35dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"/>
         <TextView
             android:id="@+id/tab_list_listo"
-            android:layout_width="35dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"/>
         <Button
             android:id="@+id/tab_list_pagar"
-            android:layout_width="35dp"
+            android:layout_width="130dp"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:text="@string/btn_pagar" />

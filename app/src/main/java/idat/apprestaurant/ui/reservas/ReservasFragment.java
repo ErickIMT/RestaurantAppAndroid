@@ -1,5 +1,6 @@
 package idat.apprestaurant.ui.reservas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import java.util.List;
 import idat.apprestaurant.Model.AdapterListaReservas;
 import idat.apprestaurant.Model.Reserva;
 import idat.apprestaurant.R;
+import idat.apprestaurant.RegistroReservaActivity;
 import idat.apprestaurant.api.ReservaApi;
 import idat.apprestaurant.api.ReservaService;
 import idat.apprestaurant.databinding.FragmentReservasBinding;
@@ -50,7 +52,9 @@ public class ReservasFragment extends Fragment {
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Vas a Registrar un Reserva", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Abriendo Formulario", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getContext(), RegistroReservaActivity.class);
+                startActivity(intent);
             }
         });
         consultarApi();

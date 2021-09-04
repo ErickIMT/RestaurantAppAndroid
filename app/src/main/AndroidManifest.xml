@@ -13,9 +13,12 @@
         android:theme="@style/Theme.AppRestaurant"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".RegistroReservaActivity"
+            android:exported="true" />
+        <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
-            android:theme="@style/Theme.AppRestaurant.NoActionBar"></activity>
+            android:theme="@style/Theme.AppRestaurant.NoActionBar" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>

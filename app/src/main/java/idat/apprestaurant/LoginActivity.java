@@ -23,13 +23,14 @@ import retrofit2.Response;
 
 public class LoginActivity extends Activity implements LoginView, View.OnClickListener {
 
-    UsuarioService servU;
+    private UsuarioService servU;
 
     private ProgressBar progressBar;
     private EditText usuario;
     private EditText password;
     private Button btnLogin;
     private LoginPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

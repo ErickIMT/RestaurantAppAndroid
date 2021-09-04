@@ -34,4 +34,9 @@
     <string name="tab_header_hora">Hora</string>
     <string name="tab_header_cliente">Cliente</string>
 
+    <string name="txtv_registro_fecha">Fecha</string>
+    <string name="txtv_registro_hora">Hora</string>
+    <string name="txtv_registro_mesa">Mesa</string>
+    <string name="txtv_registro_cliente">Cliente</string>
+    <string name="btn_Registrar">Registrar</string>
 </resources>

@@ -4,7 +4,7 @@ import okhttp3.OkHttpClient;
 
 public class PlatoApi {
 
-    public static final String BASE_URL_LISTA_PLATOS = "http://192.168.1.35:9323/apiRestaurantApp/api/platos/lista/";
+    private static final String BASE_URL_LISTA_PLATOS = "http://192.168.1.35:9323/apiRestaurantApp/api/platos/lista/";
 
     public static PlatoService getListaPromoService(){
         OkHttpClient okHttpClient = new OkHttpClient();

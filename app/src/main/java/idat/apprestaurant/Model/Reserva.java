@@ -15,7 +15,7 @@ public class Reserva {
     private Integer mesa;
     @SerializedName("fecha")
     @Expose
-    private Date fecha;
+    private String fecha;
     @SerializedName("hora")
     @Expose
     private String hora;
@@ -23,7 +23,9 @@ public class Reserva {
     @Expose
     private String nombreCliente;
 
-    public Reserva(Integer idReserva, Integer mesa, Date fecha, String hora, String nombreCliente) {
+    public Reserva(){}
+
+    public Reserva(Integer idReserva, Integer mesa, String fecha, String hora, String nombreCliente) {
         this.idReserva = idReserva;
         this.mesa = mesa;
         this.fecha = fecha;
@@ -47,11 +49,11 @@ public class Reserva {
         this.mesa = mesa;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

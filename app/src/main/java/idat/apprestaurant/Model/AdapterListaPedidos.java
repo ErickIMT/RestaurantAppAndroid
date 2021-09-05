@@ -1,6 +1,7 @@
 package idat.apprestaurant.Model;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import idat.apprestaurant.MenuActivity;
+import idat.apprestaurant.MetodosPago;
 import idat.apprestaurant.R;
 
 public class AdapterListaPedidos extends RecyclerView.Adapter<AdapterListaPedidos.ViewHolder> {
@@ -39,6 +42,14 @@ public class AdapterListaPedidos extends RecyclerView.Adapter<AdapterListaPedido
             Pedido pedido = lista.get(position);
             holder.mesa.setText(pedido.getMesa().toString());
             holder.pagar.setText("Pagar");
+            holder.pagar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, MetodosPago.class);
+                    intent.putExtra("id",pedido.getIdPedido());
+                    context.startActivity(intent);
+                }
+            });
             if(pedido.isListo()){
                 holder.listo.setText("Listo");
             }else{

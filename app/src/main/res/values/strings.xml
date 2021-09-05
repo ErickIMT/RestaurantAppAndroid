@@ -23,6 +23,10 @@
     <string name="menu_LogOut">Log Out</string>
 
     <string name="btn_formReserva">Registrar Reserva</string>
+    <string name="btn_wallet">Wallet (QR)</string>
+    <string name="btn_efectivo">Efectivo</string>
+    <string name="btn_tarjeta">Tarjeta</string>
+    <string name="btn_finalizar">Finalizar</string>
 
     <string name="tab_header_id">ID</string>
     <string name="tab_header_mesa">Mesa</string>
@@ -39,4 +43,7 @@
     <string name="txtv_registro_mesa">Mesa</string>
     <string name="txtv_registro_cliente">Cliente</string>
     <string name="btn_Registrar">Registrar</string>
+
+    <string name="titulo_form_reserva">Registro de Reserva</string>
+    <string name="titulo_wallet">Wallet (QR)</string>
 </resources>

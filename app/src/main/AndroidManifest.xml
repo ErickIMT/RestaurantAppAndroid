@@ -13,6 +13,15 @@
         android:theme="@style/Theme.AppRestaurant"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".WalletActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Wallet"
+            android:exported="true" />
+        <activity
+            android:name=".MetodosPago"
+            android:exported="true" />
+        <activity
             android:name=".RegistroReservaActivity"
             android:exported="true" />
         <activity

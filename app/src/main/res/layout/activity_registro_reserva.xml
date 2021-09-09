@@ -37,12 +37,35 @@
         android:layout_height="50dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="24dp"
+        android:clickable="true"
         android:ems="10"
+        android:focusable="false"
+        android:gravity="center"
+        android:hint="@string/hint_fecha_reserva"
         android:inputType="date"
+        android:maxLines="1"
         app:layout_constraintBottom_toTopOf="@+id/edtHora"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/txv_registro_fecha" />
+
+    <EditText
+        android:id="@+id/edtHora"
+        android:layout_width="212dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="36dp"
+        android:clickable="true"
+        android:ems="10"
+        android:focusable="false"
+        android:gravity="center"
+        android:hint="@string/hint_hora_reserva"
+        android:inputType="time"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@+id/edtMesa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.923"
+        app:layout_constraintStart_toEndOf="@+id/txv_registro_hora" />
 
     <TextView
         android:id="@+id/txv_registro_cliente"
@@ -55,27 +78,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/edtHora"
-        android:layout_width="212dp"
-        android:layout_height="44dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="36dp"
-        android:ems="10"
-        android:inputType="time"
-        app:layout_constraintBottom_toTopOf="@+id/edtMesa"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/txv_registro_hora" />
-
-    <EditText
+    <Spinner
         android:id="@+id/edtMesa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:entries="@array/mesas"
+        android:layout_width="214dp"
+        android:layout_height="45dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="24dp"
-        android:ems="10"
-        android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/edtCliente"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -114,17 +123,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.787" />
-
-    <TextView
-        android:id="@+id/txtvFormatoFecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:text="Fecha: 'yyyy-mm-dd'"
-        app:layout_constraintBottom_toTopOf="@+id/edtFecha"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.72"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView4"

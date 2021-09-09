@@ -17,6 +17,9 @@
     <string name="action_settings">Settings</string>
     <string name="btn_pagar">Pagar</string>
 
+    <string name="hint_fecha_reserva">Fecha de Reserva</string>
+    <string name="hint_hora_reserva">Hora de Reserva</string>
+
     <string name="menu_Menu">Menu</string>
     <string name="menu_Reservas">Reservas</string>
     <string name="menu_Pedidos">Pedidos</string>
@@ -46,4 +49,16 @@
 
     <string name="titulo_form_reserva">Registro de Reserva</string>
     <string name="titulo_wallet">Wallet (QR)</string>
+
+    <string-array name="mesas">
+        <item>Selecciona Mesa...</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
 </resources>

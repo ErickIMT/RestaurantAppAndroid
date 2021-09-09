@@ -2,12 +2,17 @@ package idat.apprestaurant;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.sql.Date;
@@ -15,6 +20,8 @@ import java.sql.Date;
 import idat.apprestaurant.Model.Reserva;
 import idat.apprestaurant.api.ReservaApi;
 import idat.apprestaurant.api.ReservaService;
+import idat.apprestaurant.ui.dialog.DatePickerFragment;
+import idat.apprestaurant.ui.dialog.TimePickerFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,7 +29,8 @@ import retrofit2.Response;
 public class RegistroReservaActivity extends AppCompatActivity {
 
     private ReservaService servR;
-    private EditText fecha, hora, mesa, cliente;
+    private EditText fecha, hora, cliente;
+    private Spinner mesa;
     private Button btnRegistrar;
 
     @Override
@@ -36,6 +44,28 @@ public class RegistroReservaActivity extends AppCompatActivity {
         cliente = findViewById(R.id.edtCliente);
         btnRegistrar = findViewById(R.id.btn_grabar_reserva);
 
+        fecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.edtFecha:
+                        showDatePickerDialog();
+                        break;
+                }
+            }
+        });
+
+        hora.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()){
+                    case R.id.edtHora:
+                        showTimePickerDialog();
+                        break;
+                }
+            }
+        });
+
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,11 +74,41 @@ public class RegistroReservaActivity extends AppCompatActivity {
         });
     }
 
+    private void showDatePickerDialog(){
+        DatePickerFragment dateFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                //Al mes se le suma 1 porque Enero empieza en 0
+                final String selectFecha = year + "-"+twoDigits(month+1)+"-"+twoDigits(dayOfMonth);
+                fecha.setText(selectFecha);
+            }
+        });
+
+        dateFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    private void showTimePickerDialog(){
+        TimePickerFragment timeFragment = TimePickerFragment.newInstance(new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                final String selectHora = hourOfDay+":"+minute+":"+"00";
+                hora.setText(selectHora);
+            }
+        });
+
+        timeFragment.show(getSupportFragmentManager(),"timePicker");
+    }
+
+    private String twoDigits(int n){
+        return (n <= 9) ? ("0"+n) : String.valueOf(n);
+    }
+
     private void registrarReserva(){
         Reserva reserva =  new Reserva();
         reserva.setFecha(fecha.getText().toString());
         reserva.setHora(hora.getText().toString());
-        reserva.setMesa(Integer.parseInt(mesa.getText().toString()));
+        reserva.setMesa(Integer.parseInt(mesa.getSelectedItem().toString()));
         reserva.setNombreCliente(cliente.getText().toString());
 
         servR = ReservaApi.getReservaService();
@@ -72,7 +132,7 @@ public class RegistroReservaActivity extends AppCompatActivity {
                 Log.e("Error-Retrofit: Registro Reserva", "Mensaje: "+t.getMessage());
             }
         });
-
-
     }
+
+
 }

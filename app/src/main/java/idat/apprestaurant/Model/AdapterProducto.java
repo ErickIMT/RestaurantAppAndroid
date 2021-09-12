@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+import idat.apprestaurant.MenuActivity;
 import idat.apprestaurant.R;
 
 import static java.lang.String.valueOf;
@@ -24,6 +26,7 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
 
     LayoutInflater inflater;
     ArrayList<Producto> listaProducto;
+    MenuActivity activity = new MenuActivity();
     //listener
     private View.OnClickListener listener;
 
@@ -48,11 +51,62 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
 
-        String nombre = listaProducto.get(position).getNombre();
-        float precio = listaProducto.get(position).getPrecio();
-        holder.nombre.setText(nombre);
-        holder.precio.setText(valueOf(precio));
+        Producto producto = listaProducto.get(position);
+
+        PedidoPlato plato = new PedidoPlato();
+
+        holder.nombre.setText(producto.getNombre());
+        holder.precio.setText(valueOf(producto.getPrecio()));
         holder.imagen.setImageResource(R.drawable.menupromo);
+        holder.aggPlato.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                plato.setCantidad(1);
+                plato.setPlatoPed(producto);
+                //agregarALista en Activity
+                Log.i("Adapter Producto", "onClick: AggPlato: "+plato.getCantidad()+" y "+plato.getPlatoPed().getNombre());
+                activity.aggListaFragment(plato);
+
+
+                holder.layoutBtns.setVisibility(View.VISIBLE);
+                holder.aggPlato.setVisibility(View.GONE);
+                holder.cant.setText(valueOf(plato.getCantidad()));
+            }
+        });
+
+        holder.menos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int total = plato.getCantidad();
+                total--;
+                if(total > 0){
+                    plato.setCantidad(total);
+                    //Actualizar Lista;
+                    activity.updateListaFragment(plato);
+                    holder.cant.setText(valueOf(total));
+                }else{
+                    holder.layoutBtns.setVisibility(View.GONE);
+                    holder.aggPlato.setVisibility(View.VISIBLE);
+                    plato.setCantidad(total);
+                    //Borrar de Lista
+                    activity.removeListaFragment(plato);
+                }
+            }
+        });
+
+        holder.mas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int total = plato.getCantidad();
+                total++;
+                plato.setCantidad(total);
+                //ClickListener Actualizar Lista;
+                activity.updateListaFragment(plato);
+
+                holder.cant.setText(valueOf(total));
+            }
+        });
+
     }
 
     @Override
@@ -68,14 +122,20 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView nombre, precio;
-        ImageView imagen;
+        TextView nombre, precio, cant, aggPlato;
+        ImageView imagen, menos, mas;
+        LinearLayout layoutBtns;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             nombre = itemView.findViewById(R.id.txtNombreProducto);
             precio = itemView.findViewById(R.id.txtPrecioProducto);
+            cant = itemView.findViewById(R.id.txvCantPlato);
             imagen = itemView.findViewById(R.id.imgProducto);
+            menos = itemView.findViewById(R.id.imgMenos);
+            mas = itemView.findViewById(R.id.imgMas);
+            layoutBtns = itemView.findViewById(R.id.layoutBtnsProducto);
+            aggPlato = itemView.findViewById(R.id.btnAgregarPlato);
         }
     }
 }

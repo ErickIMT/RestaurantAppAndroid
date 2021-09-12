@@ -20,6 +20,11 @@ public class PedidoPlato {
 
     public PedidoPlato(){}
 
+    public PedidoPlato(int cantidad, Producto platoPed) {
+        this.cantidad = cantidad;
+        this.platoPed = platoPed;
+    }
+
     public PedidoPlato(Integer idPedidoPlato, int cantidad, Producto platoPed) {
         this.idPedidoPlato = idPedidoPlato;
         this.cantidad = cantidad;

@@ -1,6 +1,9 @@
 package idat.apprestaurant;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 
@@ -12,6 +15,13 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import idat.apprestaurant.Model.Pedido;
+import idat.apprestaurant.Model.PedidoPlato;
+import idat.apprestaurant.Model.Producto;
 import idat.apprestaurant.databinding.ActivityMenuBinding;
 
 
@@ -19,6 +29,34 @@ public class MenuActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMenuBinding binding;
+    private ArrayList<PedidoPlato> pedidoPlatosList;
+
+    public void aggListaFragment(PedidoPlato plato){
+        if(pedidoPlatosList == null){
+            pedidoPlatosList = new ArrayList<>();
+        }
+
+        pedidoPlatosList.add(plato);
+
+        for(PedidoPlato i:pedidoPlatosList){
+            Log.i("Lista:","Menu Activity: "+i.getCantidad()+" y "+i.getPlatoPed().getNombre());
+        }
+
+    }
+
+    public void updateListaFragment(PedidoPlato plato){
+        if(pedidoPlatosList.contains(plato)){
+            int index = pedidoPlatosList.indexOf(plato);
+            pedidoPlatosList.remove(index);
+            pedidoPlatosList.add(index,plato);
+        }
+    }
+
+    public void removeListaFragment(PedidoPlato plato){
+        if(pedidoPlatosList.contains(plato)){
+            pedidoPlatosList.remove(plato);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,18 +65,13 @@ public class MenuActivity extends AppCompatActivity {
         binding = ActivityMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //Enviar Pedido a confirmarActivity
         setSupportActionBar(binding.appBarMenu.toolbar);
-        binding.appBarMenu.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        binding.appBarMenu.fab.setOnClickListener(this::onClick);
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_menu, R.id.nav_reservas, R.id.nav_pedidos)
                 .setDrawerLayout(drawer)
@@ -46,6 +79,17 @@ public class MenuActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_menu);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+    }
+
+    public void onClick(View view) {
+
+        if(pedidoPlatosList == null){
+            Snackbar.make(view, "Agrega Productos para Enviar", Snackbar.LENGTH_LONG).show();
+        }else{
+            Intent intent = new Intent(MenuActivity.this,ConfirmarPedidoActivity.class);
+            intent.putExtra("lista", pedidoPlatosList);
+            startActivity(intent);
+        }
     }
 
     @Override

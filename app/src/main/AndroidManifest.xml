@@ -13,6 +13,9 @@
         android:theme="@style/Theme.AppRestaurant"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ConfirmarPedidoActivity"
+            android:exported="true" />
+        <activity
             android:name=".WalletActivity"
             android:exported="true" />
         <activity

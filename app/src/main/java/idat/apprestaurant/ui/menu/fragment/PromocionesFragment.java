@@ -30,7 +30,6 @@ public class PromocionesFragment extends Fragment {
     AdapterProducto adapterProducto;
     RecyclerView rView;
     ArrayList<Producto> listaProductos = new ArrayList<>();
-    List<Producto> listaApi = new ArrayList<>();
     PlatoService servP;
 
     @Override
@@ -50,12 +49,7 @@ public class PromocionesFragment extends Fragment {
         call.enqueue(new Callback<List<Producto>>() {
             @Override
             public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
-                listaApi.addAll(response.body());
-
-                //Cargar Datos a la lista
-                for(Producto p : listaApi){
-                    listaProductos.add(new Producto(p.getNombre(),p.getPrecio()));
-                }
+                listaProductos.addAll(response.body());
 
                 //Mostrar Datos
                 mostrarData();

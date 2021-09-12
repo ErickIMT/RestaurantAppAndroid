@@ -20,10 +20,11 @@ public class Producto {
 
     public Producto(){}
 
-    public Producto(String nombre, float precio) {
-        this.nombre = nombre;
-        this.precio = precio;
+    public Producto(Integer idPlato) {
+        this.idPlato = idPlato;
     }
+
+
 
     public Producto(Integer idPlato, String nombre, String descripcion, float precio) {
         this.idPlato = idPlato;

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import idat.apprestaurant.MenuActivity;
 import idat.apprestaurant.Model.AdapterProducto;
 import idat.apprestaurant.Model.Producto;
 import idat.apprestaurant.R;
@@ -28,7 +29,6 @@ public class AcompanamientosFragment extends Fragment {
     AdapterProducto adapterProducto;
     RecyclerView rView;
     ArrayList<Producto> listaProductos = new ArrayList<>();
-    List<Producto> listaApi = new ArrayList<>();
     PlatoService servP;
 
     @Override
@@ -48,12 +48,7 @@ public class AcompanamientosFragment extends Fragment {
         call.enqueue(new Callback<List<Producto>>() {
             @Override
             public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
-                listaApi.addAll(response.body());
-
-                //Cargar Datos a la lista
-                for(Producto p : listaApi){
-                    listaProductos.add(new Producto(p.getNombre(),p.getPrecio()));
-                }
+                listaProductos.addAll(response.body());
 
                 //Mostrar Datos
                 mostrarData();
@@ -66,11 +61,12 @@ public class AcompanamientosFragment extends Fragment {
         });
     }
 
+
+
     public void mostrarData(){
         rView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapterProducto = new AdapterProducto(getContext(), listaProductos);
         rView.setAdapter(adapterProducto);
-
         adapterProducto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

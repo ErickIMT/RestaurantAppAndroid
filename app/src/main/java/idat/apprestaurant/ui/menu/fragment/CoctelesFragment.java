@@ -14,8 +14,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import idat.apprestaurant.MenuActivity;
 import idat.apprestaurant.Model.AdapterProducto;
-import idat.apprestaurant.Model.Producto;
+import idat.apprestaurant.Model.PedidoPlato;
+import idat.apprestaurant.Model.Plato;
 import idat.apprestaurant.R;
 import idat.apprestaurant.api.PlatoApi;
 import idat.apprestaurant.api.PlatoService;
@@ -23,11 +25,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CoctelesFragment extends Fragment {
+public class CoctelesFragment extends Fragment implements AdapterProducto.platoListClickListener{
 
     AdapterProducto adapterProducto;
     RecyclerView rView;
-    ArrayList<Producto> listaProductos = new ArrayList<>();
+    ArrayList<Plato> listaPlatoes = new ArrayList<>();
     PlatoService servP;
 
     @Override
@@ -43,18 +45,18 @@ public class CoctelesFragment extends Fragment {
 
     public void consultarApi(){
         servP = PlatoApi.getListaPromoService();
-        Call<List<Producto>> call = servP.getListaTragos();
-        call.enqueue(new Callback<List<Producto>>() {
+        Call<List<Plato>> call = servP.getListaTragos();
+        call.enqueue(new Callback<List<Plato>>() {
             @Override
-            public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
-                listaProductos.addAll(response.body());
+            public void onResponse(Call<List<Plato>> call, Response<List<Plato>> response) {
+                listaPlatoes.addAll(response.body());
 
                 //Mostrar Datos
                 mostrarData();
             }
 
             @Override
-            public void onFailure(Call<List<Producto>> call, Throwable t) {
+            public void onFailure(Call<List<Plato>> call, Throwable t) {
                 Toast.makeText(getContext(), "Ocurrio Un Error: "+ t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -62,15 +64,22 @@ public class CoctelesFragment extends Fragment {
 
     public void mostrarData(){
         rView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapterProducto = new AdapterProducto(getContext(), listaProductos);
+        adapterProducto = new AdapterProducto(getContext(), listaPlatoes,this);
         rView.setAdapter(adapterProducto);
+    }
 
-        adapterProducto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String nombre = listaProductos.get(rView.getChildAdapterPosition(v)).getNombre();
-                Toast.makeText(getContext(),"Selecciono: "+nombre,Toast.LENGTH_SHORT).show();
-            }
-        });
+    @Override
+    public void agregarPlatoLista(PedidoPlato plato) {
+        ((MenuActivity)getActivity()).aggListaFragment(plato);
+    }
+
+    @Override
+    public void modificarPlatoLista(PedidoPlato plato) {
+        ((MenuActivity)getActivity()).updateListaFragment(plato);
+    }
+
+    @Override
+    public void eliminarPlatoLista(PedidoPlato plato) {
+        ((MenuActivity)getActivity()).removeListaFragment(plato);
     }
 }

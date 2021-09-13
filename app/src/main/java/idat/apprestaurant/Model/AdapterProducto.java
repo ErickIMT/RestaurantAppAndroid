@@ -1,7 +1,6 @@
 package idat.apprestaurant.Model;
 
 import android.content.Context;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,22 +16,25 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-import idat.apprestaurant.MenuActivity;
 import idat.apprestaurant.R;
 
 import static java.lang.String.valueOf;
 
-public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHolder> implements View.OnClickListener{
+public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHolder>{
 
-    LayoutInflater inflater;
-    ArrayList<Producto> listaProducto;
-    MenuActivity activity = new MenuActivity();
-    //listener
-    private View.OnClickListener listener;
+    private LayoutInflater inflater;
+    private ArrayList<Plato> listaPlato;
+    private platoListClickListener listListener;
 
-    public AdapterProducto(Context context, ArrayList<Producto> listaProducto){
+    public AdapterProducto(Context context, ArrayList<Plato> listaPlato, platoListClickListener listListener){
         this.inflater = LayoutInflater.from(context);
-        this.listaProducto = listaProducto;
+        this.listaPlato = listaPlato;
+        this.listListener = listListener;
+    }
+
+    public AdapterProducto(Context context, ArrayList<Plato> listaPlato){
+        this.inflater = LayoutInflater.from(context);
+        this.listaPlato = listaPlato;
     }
 
     @NonNull
@@ -40,18 +42,13 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.lista_productos, parent, false);
-        view.setOnClickListener(this);
         return new ViewHolder(view);
-    }
-
-    public void setOnClickListener(View.OnClickListener listener){
-        this.listener = listener;
     }
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
 
-        Producto producto = listaProducto.get(position);
+        Plato producto = listaPlato.get(position);
 
         PedidoPlato plato = new PedidoPlato();
 
@@ -65,8 +62,7 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
                 plato.setPlatoPed(producto);
                 //agregarALista en Activity
                 Log.i("Adapter Producto", "onClick: AggPlato: "+plato.getCantidad()+" y "+plato.getPlatoPed().getNombre());
-                activity.aggListaFragment(plato);
-
+                listListener.agregarPlatoLista(plato);
 
                 holder.layoutBtns.setVisibility(View.VISIBLE);
                 holder.aggPlato.setVisibility(View.GONE);
@@ -82,14 +78,14 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
                 if(total > 0){
                     plato.setCantidad(total);
                     //Actualizar Lista;
-                    activity.updateListaFragment(plato);
+                    listListener.modificarPlatoLista(plato);
                     holder.cant.setText(valueOf(total));
                 }else{
                     holder.layoutBtns.setVisibility(View.GONE);
                     holder.aggPlato.setVisibility(View.VISIBLE);
                     plato.setCantidad(total);
                     //Borrar de Lista
-                    activity.removeListaFragment(plato);
+                    listListener.eliminarPlatoLista(plato);
                 }
             }
         });
@@ -101,7 +97,7 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
                 total++;
                 plato.setCantidad(total);
                 //ClickListener Actualizar Lista;
-                activity.updateListaFragment(plato);
+                listListener.modificarPlatoLista(plato);
 
                 holder.cant.setText(valueOf(total));
             }
@@ -111,15 +107,15 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
 
     @Override
     public int getItemCount() {
-        return listaProducto.size();
+        return listaPlato.size();
     }
 
-    @Override
+    /*@Override
     public void onClick(View v) {
         if(listener!=null){
             listener.onClick(v);
         }
-    }
+    }*/
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView nombre, precio, cant, aggPlato;
@@ -137,5 +133,11 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
             layoutBtns = itemView.findViewById(R.id.layoutBtnsProducto);
             aggPlato = itemView.findViewById(R.id.btnAgregarPlato);
         }
+    }
+
+    public interface platoListClickListener{
+        public void agregarPlatoLista(PedidoPlato plato);
+        public void modificarPlatoLista(PedidoPlato plato);
+        public void eliminarPlatoLista(PedidoPlato plato);
     }
 }

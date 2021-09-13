@@ -5,14 +5,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,13 +18,9 @@ import java.util.List;
 
 import idat.apprestaurant.Model.AdapterListaPedidos;
 import idat.apprestaurant.Model.Pedido;
-import idat.apprestaurant.Model.PedidoPlato;
-import idat.apprestaurant.Model.Producto;
-import idat.apprestaurant.Model.TipoPedido;
 import idat.apprestaurant.R;
 import idat.apprestaurant.api.PedidoApi;
 import idat.apprestaurant.api.PedidoService;
-import idat.apprestaurant.databinding.FragmentPedidosBinding;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

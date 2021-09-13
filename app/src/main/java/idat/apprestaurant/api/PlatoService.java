@@ -2,52 +2,52 @@ package idat.apprestaurant.api;
 
 import java.util.List;
 
-import idat.apprestaurant.Model.Producto;
+import idat.apprestaurant.Model.Plato;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface PlatoService {
 
     @GET("1")
-    Call<List<Producto>> getListaPromociones();
+    Call<List<Plato>> getListaPromociones();
 
     @GET("2")
-    Call<List<Producto>> getListaPiqueos();
+    Call<List<Plato>> getListaPiqueos();
 
     @GET("3")
-    Call<List<Producto>> getListaCebiches();
+    Call<List<Plato>> getListaCebiches();
 
     @GET("4")
-    Call<List<Producto>> getListaNinos();
+    Call<List<Plato>> getListaNinos();
 
     @GET("5")
-    Call<List<Producto>> getListaTiradito();
+    Call<List<Plato>> getListaTiradito();
 
     @GET("6")
-    Call<List<Producto>> getListaMakis();
+    Call<List<Plato>> getListaMakis();
 
     @GET("7")
-    Call<List<Producto>> getListaSopas();
+    Call<List<Plato>> getListaSopas();
 
     @GET("8")
-    Call<List<Producto>> getListaAcompanamientos();
+    Call<List<Plato>> getListaAcompanamientos();
 
     @GET("9")
-    Call<List<Producto>> getListaEspecialidad();
+    Call<List<Plato>> getListaEspecialidad();
 
     @GET("10")
-    Call<List<Producto>> getListaPastasRisottos();
+    Call<List<Plato>> getListaPastasRisottos();
 
     @GET("11")
-    Call<List<Producto>> getListaArroces();
+    Call<List<Plato>> getListaArroces();
 
     @GET("12")
-    Call<List<Producto>> getListaBebidas();
+    Call<List<Plato>> getListaBebidas();
 
     @GET("13")
-    Call<List<Producto>> getListaTragos();
+    Call<List<Plato>> getListaTragos();
 
     @GET("14")
-    Call<List<Producto>> getListaCervezas();
+    Call<List<Plato>> getListaCervezas();
 
 }

@@ -3,7 +3,9 @@ package idat.apprestaurant.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Producto {
+import java.io.Serializable;
+
+public class Plato implements Serializable {
 
     @SerializedName("idPlato")
     @Expose
@@ -18,15 +20,13 @@ public class Producto {
     @Expose
     private float precio;
 
-    public Producto(){}
+    public Plato(){}
 
-    public Producto(Integer idPlato) {
+    public Plato(Integer idPlato) {
         this.idPlato = idPlato;
     }
 
-
-
-    public Producto(Integer idPlato, String nombre, String descripcion, float precio) {
+    public Plato(Integer idPlato, String nombre, String descripcion, float precio) {
         this.idPlato = idPlato;
         this.nombre = nombre;
         this.descripcion = descripcion;

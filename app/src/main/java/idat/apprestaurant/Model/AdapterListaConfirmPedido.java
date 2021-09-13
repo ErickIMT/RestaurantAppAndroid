@@ -37,7 +37,7 @@ public class AdapterListaConfirmPedido extends RecyclerView.Adapter<AdapterLista
             PedidoPlato pedido = pedidoPlato.get(position);
 
             holder.plato.setText(pedido.getPlatoPed().getNombre());
-            holder.cant.setText(pedido.getCantidad());
+            holder.cant.setText(String.valueOf(pedido.getCantidad()));
             holder.precio.setText(String.valueOf(pedido.getPlatoPed().getPrecio()));
         }
     }

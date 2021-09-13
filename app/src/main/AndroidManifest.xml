@@ -19,9 +19,6 @@
             android:name=".WalletActivity"
             android:exported="true" />
         <activity
-            android:name=".Wallet"
-            android:exported="true" />
-        <activity
             android:name=".MetodosPago"
             android:exported="true" />
         <activity
@@ -30,14 +27,21 @@
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
-            android:theme="@style/Theme.AppRestaurant.NoActionBar" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".LoginActivity">
+            android:theme="@style/Theme.AppRestaurant.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" />
+
+        <activity android:name=".LoginActivity">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
         </activity>
     </application>
 

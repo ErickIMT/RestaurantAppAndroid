@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
@@ -34,11 +35,11 @@ public class Pedido {
     private TipoPedido tipoPedido;
     @SerializedName("pedidoPlatoPed")
     @Expose
-    private List<PedidoPlato> pedidoPlatoPed;
+    private ArrayList<PedidoPlato> pedidoPlatoPed;
 
     public Pedido(){}
 
-    public Pedido(String numDoc, String fecha, float total, boolean listo, boolean pago, TipoPedido tipoPedido, List<PedidoPlato> pedidoPlatoPed) {
+    public Pedido(String numDoc, String fecha, float total, boolean listo, boolean pago, TipoPedido tipoPedido, ArrayList<PedidoPlato> pedidoPlatoPed) {
         this.numDoc = numDoc;
         this.fecha = fecha;
         this.total = total;
@@ -48,7 +49,7 @@ public class Pedido {
         this.pedidoPlatoPed = pedidoPlatoPed;
     }
 
-    public Pedido(Integer idPedido, String numDoc, String fecha, float total, boolean listo, boolean pago, TipoPedido tipoPedido, List<PedidoPlato> pedidoPlatoPed) {
+    public Pedido(Integer idPedido, String numDoc, String fecha, float total, boolean listo, boolean pago, TipoPedido tipoPedido, ArrayList<PedidoPlato> pedidoPlatoPed) {
         this.idPedido = idPedido;
         this.numDoc = numDoc;
         this.fecha = fecha;
@@ -99,11 +100,12 @@ public class Pedido {
         this.tipoPedido = tipoPedido;
     }
 
-    public List<PedidoPlato> getPedidoPlatoPed() {
+    public ArrayList<PedidoPlato> getPedidoPlatoPed() {
         return pedidoPlatoPed;
     }
 
-    public void setPedidoPlatoPed(List<PedidoPlato> pedidoPlatoPed) { this.pedidoPlatoPed = pedidoPlatoPed; }
+    public void setPedidoPlatoPed(ArrayList<PedidoPlato> pedidoPlatoPed) { this.pedidoPlatoPed = pedidoPlatoPed; }
+
     public boolean isListo() { return listo; }
 
     public void setListo(boolean listo) { this.listo = listo; }
